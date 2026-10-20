@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Інформатика 33-142 | Платформа навчання</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: radial-gradient(circle at 50% 20%, #0f2744 0%, #06101e 60%, #02070f 100%);
+      color: #ffffff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    /* Навігація */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 40px;
+      backdrop-filter: blur(10px);
+      background: rgba(6, 16, 30, 0.7);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      font-size: 1.15rem;
+      letter-spacing: 0.5px;
+    }
+
+    .brand-icon {
+      font-size: 1.6rem;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    nav a {
+      color: #cbd5e1;
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 600;
+      transition: color 0.2s;
+    }
+
+    nav a:hover, nav a.active {
+      color: #38bdf8;
+    }
+
+    nav a.active {
+      background: rgba(56, 189, 248, 0.15);
+      padding: 6px 14px;
+      border-radius: 20px;
+      border: 1px solid rgba(56, 189, 248, 0.3);
+    }
+
+    /* Головний блок Hero */
+    .hero {
+      text-align: center;
+      padding: 60px 20px 30px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.4rem, 5vw, 3.8rem);
+      font-weight: 900;
+      letter-spacing: 1px;
+      text-shadow: 0 0 35px rgba(56, 189, 248, 0.35);
+      margin-bottom: 15px;
+    }
+
+    .hero p {
+      font-size: 1.1rem;
+      color: #94a3b8;
+      max-width: 650px;
+      margin: 0 auto 35px;
+      line-height: 1.6;
+    }
+
+    .section-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #e2e8f0;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* Контейнер карток курсів */
+    .courses-wrapper {
+      max-width: 1200px;
+      margin: 20px auto 70px;
+      padding: 0 25px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 28px;
+      width: 100%;
+    }
+
+    /* Базова картка */
+    .course-card {
+      background: rgba(13, 24, 44, 0.85);
+      border-radius: 24px;
+      padding: 30px 26px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.35s ease;
+      backdrop-filter: blur(14px);
+      position: relative;
+    }
+
+    .course-card:hover {
+      transform: translateY(-8px);
+    }
+
+    /* Індивідуальні неонові рамки */
+    .card-python {
+      border: 2px solid rgba(255, 212, 59, 0.7);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(255, 212, 59, 0.15);
+    }
+    .card-python:hover {
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6), 0 0 30px rgba(255, 212, 59, 0.35);
+    }
+
+    .card-excel {
+      border: 2px solid rgba(33, 163, 102, 0.7);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(33, 163, 102, 0.15);
+    }
+    .card-excel:hover {
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6), 0 0 30px rgba(33, 163, 102, 0.35);
+    }
+
+    .card-html {
+      border: 2px solid rgba(241, 101, 41, 0.7);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(241, 101, 41, 0.15);
+    }
+    .card-html:hover {
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6), 0 0 30px rgba(241, 101, 41, 0.35);
+    }
+
+    /* Вміст картки */
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 22px;
+    }
+
+    .card-logo {
+      width: 58px;
+      height: 58px;
+      object-fit: contain;
+    }
+
+    .card-heading h2 {
+      font-size: 1.55rem;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+    }
+
+    .card-heading p {
+      font-size: 0.85rem;
+      color: #94a3b8;
+      margin-top: 2px;
+    }
+
+    .badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 30px;
+    }
+
+    .badge {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 6px 12px;
+      border-radius: 50px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: #cbd5e1;
+    }
+
+    /* Кнопки переходу */
+    .btn-action {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      padding: 14px 20px;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 1rem;
+      color: #ffffff;
+      text-decoration: none;
+      transition: filter 0.2s, transform 0.2s;
+    }
+
+    .btn-action:hover {
+      filter: brightness(1.18);
+      transform: scale(1.02);
+    }
+
+    .btn-python {
+      background: linear-gradient(90deg, #0284c7, #38bdf8);
+      box-shadow: 0 4px 15px rgba(2, 132, 199, 0.35);
+    }
+
+    .btn-excel {
+      background: linear-gradient(90deg, #15803d, #22c55e);
+      box-shadow: 0 4px 15px rgba(34, 197, 94, 0.35);
+    }
+
+    .btn-html {
+      background: linear-gradient(90deg, #ea580c, #f97316);
+      box-shadow: 0 4px 15px rgba(234, 88, 12, 0.35);
+    }
+
+    @media (max-width: 600px) {
+      header {
+        flex-direction: column;
+        gap: 15px;
+        padding: 15px;
+      }
+      .courses-wrapper {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Меню -->
+  <header>
+    <div class="brand">
+      <span class="brand-icon">🖥️</span>
+      <span>ІНФОРМАТИКА 33-142</span>
+    </div>
+    <nav>
+      <a href="#">Старт</a>
+      <a href="#" class="active">Головна</a>
+      <!-- Замініть посилання на ваші адреси розділів у Google Sites -->
+      <a href="https://sites.google.com/view/ВАША-АДРЕСА/python">Python</a>
+      <a href="https://sites.google.com/view/ВАША-АДРЕСА/excel">Excel</a>
+      <a href="https://sites.google.com/view/ВАША-АДРЕСА/html">HTML</a>
+    </nav>
+  </header>
+
+  <!-- Банер -->
+  <main class="hero">
+    <h1>ІНФОРМАТИКА-33-142</h1>
+    <p>Інтерактивна платформа для вивчення програмування, офісних технологій та веброзробки</p>
+    <div class="section-title">Обери свій напрямок 🚀</div>
+  </main>
+
+  <!-- Картки напрямків -->
+  <section class="courses-wrapper">
+
+    <!-- Картка 1: Python -->
+    <article class="course-card card-python">
+      <div>
+        <div class="card-header">
+          <img class="card-logo" src="https://cdn-icons-png.flaticon.com/512/5968/5968350.png" alt="Python">
+          <div class="card-heading">
+            <h2>PYTHON</h2>
+            <p>Програмування з нуля</p>
+          </div>
+        </div>
+        <div class="badges">
+          <span class="badge">⭐ НУШ 5–11 класи</span>
+          <span class="badge">💻 120 уроків</span>
+          <span class="badge">🎯 Інтерактивні кейси</span>
+        </div>
+      </div>
+      <!-- ЗАМІНІТЬ ПОСИЛАННЯ В HREF -->
+      <a href="https://sites.google.com/view/ВАША-АДРЕСА/python" class="btn-action btn-python">
+        Почати навчання ➔
+      </a>
+    </article>
+
+    <!-- Картка 2: Excel -->
+    <article class="course-card card-excel">
+      <div>
+        <div class="card-header">
+          <img class="card-logo" src="https://cdn-icons-png.flaticon.com/512/732/732220.png" alt="Excel">
+          <div class="card-heading">
+            <h2>EXCEL</h2>
+            <p>Електронні таблиці та аналітика</p>
+          </div>
+        </div>
+        <div class="badges">
+          <span class="badge">⭐ Основи та формули</span>
+          <span class="badge">📊 45 уроків</span>
+          <span class="badge">✏️ Практичні задачі</span>
+        </div>
+      </div>
+      <!-- ЗАМІНІТЬ ПОСИЛАННЯ В HREF -->
+      <a href="https://sites.google.com/view/ВАША-АДРЕСА/excel" class="btn-action btn-excel">
+        Перейти до курсу ➔
+      </a>
+    </article>
+
+    <!-- Картка 3: HTML & CSS -->
+    <article class="course-card card-html">
+      <div>
+        <div class="card-header">
+          <img class="card-logo" src="https://cdn-icons-png.flaticon.com/512/732/732212.png" alt="HTML/CSS">
+          <div class="card-heading">
+            <h2>HTML & CSS</h2>
+            <p>Створення сучасних вебсайтів</p>
+          </div>
+        </div>
+        <div class="badges">
+          <span class="badge">⭐ Веброзробка</span>
+          <span class="badge">🛠️ 30 уроків</span>
+          <span class="badge">🚀 Власні сайти</span>
+        </div>
+      </div>
+      <!-- ЗАМІНІТЬ ПОСИЛАННЯ В HREF -->
+      <a href="https://sites.google.com/view/ВАША-АДРЕСА/html" class="btn-action btn-html">
+        Почати курс ➔
+      </a>
+    </article>
+
+  </section>
+
+</body>
+</html>
